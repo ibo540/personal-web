@@ -158,18 +158,19 @@ if (canvas && ctx) {
   });
 }
 
-// --- Star Cursor Logic ---
+// --- Star Cursor Logic (desktop only; hidden on touch devices via CSS) ---
+const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 const cursor = document.getElementById('star-cursor');
-document.addEventListener('mousemove', (e) => {
-  if (cursor) {
-    cursor.style.left = `${e.clientX}px`;
-    cursor.style.top = `${e.clientY}px`;
-  }
-
-  // Update global variables for glow effect
-  document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
-  document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
-});
+if (!isTouchDevice() && cursor) {
+  document.addEventListener('mousemove', (e) => {
+    if (cursor) {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    }
+    document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
+}
 
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.getElementById('nav-links');
@@ -229,19 +230,19 @@ if (menuToggle && navLinks) {
   });
 }
 
-// Mouse Move Effect (for global glow)
-document.addEventListener('mousemove', (e) => {
-  const x = e.clientX;
-  const y = e.clientY;
-  document.body.style.setProperty('--mouse-x', `${x}px`);
-  document.body.style.setProperty('--mouse-y', `${y}px`);
-});
+// Mouse Move Effect (for global glow) - desktop only
+if (!isTouchDevice()) {
+  document.addEventListener('mousemove', (e) => {
+    document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
+}
 
-// 3D Tilt Effect for Cards
-const cards = document.querySelectorAll<HTMLElement>('.project-card, .skill-card, .about-card');
-
-cards.forEach(card => {
-  card.addEventListener('mousemove', (e) => {
+// 3D Tilt Effect for Cards - desktop only (not useful on touch)
+if (!isTouchDevice()) {
+  const cards = document.querySelectorAll<HTMLElement>('.project-card, .skill-card, .about-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -259,7 +260,8 @@ cards.forEach(card => {
   card.addEventListener('mouseleave', () => {
     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
   });
-});
+  });
+}
 
 // Typing Animation
 const typeText = (element: HTMLElement, text: string, speed: number = 100) => {

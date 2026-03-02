@@ -142,10 +142,10 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   cursor: none;
-  /* Hide default cursor */
+  /* Hide default cursor (desktop only; see touch media query below) */
 }
 
-/* Custom Cursor (Glow Dot) */
+/* Custom Cursor (Glow Dot) - desktop only; hidden on touch devices */
 #star-cursor {
   position: fixed;
   top: 0;
@@ -172,6 +172,17 @@ body {
   height: 40px;
   border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 50%;
+}
+
+/* Touch devices: show default cursor, hide custom cursor (no yellow circle on tap) */
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+
+  #star-cursor {
+    display: none !important;
+  }
 }
 
 /* Space Canvas */
@@ -325,7 +336,6 @@ a {
   z-index: 1000;
   border-bottom: 1px solid var(--glass-border);
 }
-
 
 .nav-container {
   display: flex;
@@ -781,6 +791,26 @@ footer {
 
 /* ========== Mobile & Phone (tablet and below) ========== */
 @media (max-width: 768px) {
+  /* Clear, visible header bar on phone */
+  .navbar {
+    background: #050505;
+    backdrop-filter: none;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 0.75rem 0;
+    min-height: 56px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  body.light-theme .navbar {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-container {
+    flex-wrap: nowrap;
+  }
+
   .menu-toggle {
     display: flex;
     min-width: 44px;
@@ -797,7 +827,7 @@ footer {
 
   .nav-links {
     position: fixed;
-    top: 60px;
+    top: 56px;
     left: 0;
     width: 100%;
     background: #050505;
@@ -811,6 +841,10 @@ footer {
 
   .nav-links.active {
     transform: translateY(0);
+  }
+
+  body.light-theme .nav-links {
+    background: rgba(255, 255, 255, 0.98);
   }
 
   .nav-links .nav-link,
