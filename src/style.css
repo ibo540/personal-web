@@ -133,6 +133,8 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Prevent horizontal scroll on mobile; on html to avoid breaking position:fixed on iOS */
+  overflow-x: hidden;
 }
 
 body {
@@ -140,7 +142,6 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
   cursor: none;
   /* Hide default cursor (desktop only; see touch media query below) */
 }
@@ -879,6 +880,11 @@ footer {
   flex-direction: column;
   justify-content: flex-end;
   overflow: visible;
+  /* Force own layer so fixed positioning works on iOS Safari when body had overflow */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .navbar .container.nav-container {
@@ -1155,7 +1161,7 @@ body.light-theme .nav-links {
     min-height: 52px;
     display: flex;
     align-items: center;
-    z-index: 10000;
+    z-index: 99999;
   }
 
   .navbar .container.nav-container {
