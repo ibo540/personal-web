@@ -169,8 +169,7 @@ document.addEventListener('mousemove', (e) => {
   document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
 });
 
-const menuToggle = document.getElementById('menu-toggle');
-const navLinks = document.getElementById('nav-links');
+
 const themeToggle = document.getElementById('theme-toggle');
 const contactForm = document.getElementById('contact-form') as HTMLFormElement;
 
@@ -196,60 +195,29 @@ if (themeToggle) {
   });
 }
 
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-
-    // Animate icon (simple switch)
-    const icon = menuToggle.querySelector('i');
-    if (icon) {
-      if (navLinks.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
-    }
-  });
-
-  // Close menu when clicking a link
-  const links = navLinks.querySelectorAll('a');
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      const icon = menuToggle.querySelector('i');
-      if (icon) {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
-    });
-  });
-}
-
 // 3D Tilt Effect for Cards - only when hover is supported (desktop)
 const prefersHover = () => window.matchMedia('(hover: hover)').matches;
 if (prefersHover()) {
   const cards = document.querySelectorAll<HTMLElement>('.project-card, .skill-card, .about-card');
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-    // Calculate rotation (max +/- 10deg)
-    const xPct = x / rect.width;
-    const yPct = y / rect.height;
+      // Calculate rotation (max +/- 10deg)
+      const xPct = x / rect.width;
+      const yPct = y / rect.height;
 
-    const xRot = (yPct - 0.5) * 20; // -10 to +10
-    const yRot = (xPct - 0.5) * -20; // +10 to -10
+      const xRot = (yPct - 0.5) * 20; // -10 to +10
+      const yRot = (xPct - 0.5) * -20; // +10 to -10
 
-    card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale(1.02)`;
-  });
+      card.style.transform = `perspective(1000px) rotateX(${xRot}deg) rotateY(${yRot}deg) scale(1.02)`;
+    });
 
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-  });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
   });
 }
 

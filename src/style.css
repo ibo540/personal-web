@@ -176,7 +176,8 @@ body {
 }
 
 /* Touch devices: show default cursor, hide custom cursor (no yellow circle on tap) */
-@media (hover: none), (pointer: coarse) {
+@media (hover: none),
+(pointer: coarse) {
   body {
     cursor: auto;
   }
@@ -198,16 +199,19 @@ body {
     min-height: 56px !important;
     z-index: 99999 !important;
   }
+
   .navbar .container.nav-container {
     display: flex !important;
     visibility: visible !important;
   }
+
   .navbar .menu-toggle,
   .navbar .menu-toggle-label {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
+
   .navbar .theme-toggle,
   .navbar .lang-toggle {
     display: inline-flex !important;
@@ -378,18 +382,22 @@ a {
 .nav-container .logo {
   order: 1;
 }
+
 .nav-container .nav-links {
   order: 2;
   flex: 1;
   justify-content: center;
   margin: 0 1.5rem;
 }
+
 .nav-container .theme-toggle {
   order: 3;
 }
+
 .nav-container .lang-toggle {
   order: 4;
 }
+
 .nav-container .menu-toggle {
   order: 0;
 }
@@ -546,7 +554,7 @@ section {
   flex-direction: column;
 }
 
-.education-grid .about-card > div:last-of-type {
+.education-grid .about-card>div:last-of-type {
   margin-top: auto;
 }
 
@@ -835,155 +843,131 @@ footer {
 
 /* ========== Mobile & Tablet (max-width 992px): show menu, solid bar, gold button ========== */
 @media (max-width: 992px) {
-.menu-toggle,
-.menu-toggle-label {
-  display: flex !important;
-}
 
-.menu-toggle {
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 1.1rem;
-  cursor: pointer;
-  color: #ffffff;
-  padding: 0.5rem 0.75rem;
-  border: none;
-  background: transparent;
-  min-width: 48px;
-  min-height: 48px;
-  font-family: inherit;
-  font-weight: 600;
-}
+  /* Mobile: horizontally scrollable nav links */
+  .nav-links {
+    display: flex;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    background: transparent;
+    flex-direction: row;
+    padding: 0 0 0.5rem 1rem;
+    gap: 0.75rem;
+    transform: none;
+    transition: none;
+    z-index: 1;
+    list-style: none;
+    margin: 0;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* Firefox */
+    align-items: center;
+  }
 
-.menu-toggle i {
-  font-size: 1.35rem;
-  color: #ffffff;
-}
+  .nav-links::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+  }
 
-.menu-toggle-label {
-  color: #ffffff;
-}
+  .nav-links.active {
+    transform: translateY(0);
+  }
 
-/* Mobile: nav links overlay below the header bar */
-.nav-links {
-  position: fixed;
-  top: 56px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: #0a0a0a;
-  flex-direction: column;
-  padding: 2rem;
-  padding-top: max(1rem, env(safe-area-inset-top));
-  gap: 0.5rem;
-  transform: translateY(-100%);
-  transition: transform 0.25s ease;
-  z-index: 99998;
-  list-style: none;
-  margin: 0;
-  min-height: calc(100vh - 56px);
-  box-sizing: border-box;
-}
+  /* Mobile: solid header bar so it’s always visible */
+  /* Mobile: expanding header bar to contain links */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    min-height: 56px;
+    padding: 0;
+    padding-top: env(safe-area-inset-top, 0);
+    background: #0d0d0d;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.85);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
+    z-index: 99999;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: visible;
+  }
 
-.nav-links.active {
-  transform: translateY(0);
-}
+  .navbar .container.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem 1rem 0 1rem;
+    min-height: 48px;
+    flex-shrink: 0;
+    overflow: visible;
+  }
 
-/* Mobile: solid header bar so it’s always visible */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 56px;
-  min-height: 56px;
-  padding: 0;
-  padding-top: env(safe-area-inset-top, 0);
-  background: #0d0d0d;
-  border-bottom: 2px solid rgba(212, 175, 55, 0.85);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
-  z-index: 99999;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow: visible;
-  /* Force own layer so fixed positioning works on iOS Safari when body had overflow */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
+  .navbar .logo {
+    display: none;
+  }
 
-.navbar .container.nav-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 100%;
-  padding: 0.5rem 1rem;
-  min-height: 48px;
-  flex-shrink: 0;
-  overflow: visible;
-}
+  .navbar .theme-toggle,
+  .navbar .lang-toggle {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
 
-.navbar .logo {
-  display: none;
-}
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    color: #ffffff;
+    font-size: 1.2rem;
+  }
 
-.navbar .menu-toggle,
-.navbar .theme-toggle,
-.navbar .lang-toggle {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
+  .theme-toggle i {
+    color: #ffffff;
+  }
 
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  color: #ffffff;
-  font-size: 1.2rem;
-}
+  .nav-links .nav-link,
+  .nav-links .btn {
+    scroll-snap-align: start;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    min-height: auto;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+  }
 
-.theme-toggle i {
-  color: #ffffff;
-}
+  body.light-theme .navbar {
+    background: #ffffff;
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  }
 
-.nav-links .nav-link,
-.nav-links .btn {
-  display: block;
-  padding: 0.85rem 1rem;
-  min-height: 48px;
-  font-size: 1.05rem;
-  color: #e0e0e0;
-}
+  body.light-theme .theme-toggle,
+  body.light-theme .theme-toggle i {
+    color: #111111;
+  }
 
-body.light-theme .navbar {
-  background: #ffffff;
-  border-bottom-color: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-}
+  body.light-theme .nav-links {
+    background: #ffffff;
+  }
 
-body.light-theme .menu-toggle,
-body.light-theme .menu-toggle i,
-body.light-theme .menu-toggle-label,
-body.light-theme .theme-toggle,
-body.light-theme .theme-toggle i {
-  color: #111111;
-}
-
-body.light-theme .nav-links {
-  background: #ffffff;
-}
-
-/* Mobile: gold Menu button so it’s impossible to miss */
+  /* Mobile: gold Menu button so it’s impossible to miss */
   .menu-toggle {
     background: #d4af37 !important;
     background-color: #d4af37 !important;
@@ -994,6 +978,7 @@ body.light-theme .nav-links {
     min-width: 56px;
     min-height: 48px;
   }
+
   .menu-toggle i,
   .menu-toggle-label {
     color: #000 !important;
@@ -1019,6 +1004,7 @@ body.light-theme .nav-links {
   .navbar .logo {
     display: block;
   }
+
   .nav-links {
     position: static;
     transform: none;
@@ -1027,6 +1013,7 @@ body.light-theme .nav-links {
     padding: 0;
     background: transparent;
   }
+
   .nav-links .nav-link,
   .nav-links .btn {
     display: inline-block;
@@ -1039,14 +1026,12 @@ body.light-theme .nav-links {
 /* ========== Mobile & Phone (tablet and below) – extra tweaks ========== */
 @media (max-width: 768px) {
   .nav-links {
-    top: 56px;
-    min-height: calc(100vh - 56px);
-    padding-top: 1rem;
+    padding-top: 0;
   }
 
   .container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   section {
@@ -1061,7 +1046,8 @@ body.light-theme .nav-links {
   .hero {
     min-height: 100vh;
     padding: 2rem 0;
-    padding-top: 5rem; /* Clear fixed header on phone */
+    padding-top: 5rem;
+    /* Clear fixed header on phone */
   }
 
   .hero h2 {
@@ -1158,7 +1144,8 @@ body.light-theme .nav-links {
   }
 
   .form-input {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    font-size: 16px !important;
+    /* Prevents iOS zoom on focus */
     padding: 1rem;
     min-height: 48px;
   }
@@ -1441,8 +1428,14 @@ body.light-theme .form-input::placeholder {
   margin-left: 1rem;
 }
 
-[dir="rtl"] .nav-links {
-  flex-direction: row-reverse;
+[dir="rtl"] .navbar .container.nav-container {
+  justify-content: flex-start !important;
+}
+
+@media (min-width: 993px) {
+  [dir="rtl"] .nav-links {
+    flex-direction: row-reverse;
+  }
 }
 
 [dir="rtl"] .about-grid,
