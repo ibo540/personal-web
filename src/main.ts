@@ -158,19 +158,16 @@ if (canvas && ctx) {
   });
 }
 
-// --- Star Cursor Logic (desktop only; hidden on touch devices via CSS) ---
-const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+// --- Star Cursor: always update position; CSS hides it on touch devices ---
 const cursor = document.getElementById('star-cursor');
-if (!isTouchDevice() && cursor) {
-  document.addEventListener('mousemove', (e) => {
-    if (cursor) {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-    }
-    document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
-    document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
-  });
-}
+document.addEventListener('mousemove', (e) => {
+  if (cursor) {
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+  }
+  document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
+  document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
+});
 
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.getElementById('nav-links');
@@ -230,16 +227,9 @@ if (menuToggle && navLinks) {
   });
 }
 
-// Mouse Move Effect (for global glow) - desktop only
-if (!isTouchDevice()) {
-  document.addEventListener('mousemove', (e) => {
-    document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
-    document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
-  });
-}
-
-// 3D Tilt Effect for Cards - desktop only (not useful on touch)
-if (!isTouchDevice()) {
+// 3D Tilt Effect for Cards - only when hover is supported (desktop)
+const prefersHover = () => window.matchMedia('(hover: hover)').matches;
+if (prefersHover()) {
   const cards = document.querySelectorAll<HTMLElement>('.project-card, .skill-card, .about-card');
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {

@@ -791,20 +791,49 @@ footer {
 
 /* ========== Mobile & Phone (tablet and below) ========== */
 @media (max-width: 768px) {
-  /* Clear, visible header bar on phone */
+  /* Header bar must stand out from the starry background */
   .navbar {
-    background: #050505;
-    backdrop-filter: none;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    background: rgba(18, 18, 18, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.5);
     padding: 0.75rem 0;
+    padding-top: max(0.75rem, env(safe-area-inset-top));
     min-height: 56px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+  }
+
+  .navbar .nav-container {
+    align-items: center;
+  }
+
+  .menu-toggle,
+  .menu-toggle i,
+  .theme-toggle,
+  .theme-toggle i,
+  .lang-toggle {
+    color: var(--text-primary);
+  }
+
+  .menu-toggle i {
+    font-size: 1.35rem;
   }
 
   body.light-theme .navbar {
     background: rgba(255, 255, 255, 0.98);
-    border-bottom-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  body.light-theme .menu-toggle i,
+  body.light-theme .theme-toggle i {
+    color: #111;
+  }
+
+  body.light-theme .lang-toggle {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
   }
 
   .nav-container {
