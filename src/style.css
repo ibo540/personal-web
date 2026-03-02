@@ -131,6 +131,8 @@ body.light-theme i {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -770,11 +772,27 @@ footer {
   font-size: 1.5rem;
   cursor: pointer;
   color: var(--text-primary);
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
 }
 
+/* ========== Mobile & Phone (tablet and below) ========== */
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block;
+    display: flex;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-links {
@@ -785,7 +803,7 @@ footer {
     background: #050505;
     flex-direction: column;
     padding: 2rem;
-    gap: 1.5rem;
+    gap: 1rem;
     transform: translateY(-100%);
     transition: transform 0.3s ease;
     z-index: 999;
@@ -795,14 +813,203 @@ footer {
     transform: translateY(0);
   }
 
+  .nav-links .nav-link,
+  .nav-links .btn {
+    display: block;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  .lang-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  section {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero {
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+
+  .hero h2 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     line-height: 1.35;
     padding-bottom: 0.15em;
   }
 
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero .btn {
+    min-height: 48px;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-card {
+    padding: 1.5rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .info-item {
+    font-size: 0.95rem;
+  }
+
+  #experience .about-card h3 {
+    font-size: 1.05rem;
+  }
+
+  #experience .about-card p {
+    font-size: 0.9rem;
+  }
+
+  #experience .about-card .tag {
+    font-size: 0.8rem;
+  }
+
+  .education-grid .about-card {
+    padding: 1.5rem;
+  }
+
+  .education-grid .about-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .education-grid .about-card p {
+    font-size: 0.9rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .skill-card {
+    padding: 1.25rem;
+    text-align: left;
+    min-height: auto;
+  }
+
+  .skill-card h4 {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .contact-grid {
+    gap: 2rem;
+  }
+
+  .contact-info-wrapper,
+  .contact-form-wrapper {
+    padding: 1.5rem;
+  }
+
+  .contact-button {
+    min-height: 48px;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .form-input {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    padding: 1rem;
+    min-height: 48px;
+  }
+
+  textarea.form-input {
+    min-height: 120px;
+  }
+
+  #contact-form .btn-primary {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+
   .contact-actions {
     flex-direction: column;
+  }
+
+  footer p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ========== Small phones ========== */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  section {
+    padding: 2.5rem 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h2 {
+    font-size: 0.95rem;
+  }
+
+  .hero h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .about-card {
+    padding: 1.25rem;
+  }
+
+  .education-grid .about-card h3 {
+    font-size: 1rem;
+  }
+
+  .education-grid .about-card p {
+    font-size: 0.85rem;
+  }
+
+  .skill-card h4 {
+    font-size: 0.95rem;
+  }
+
+  #experience .about-card h3 {
+    font-size: 1rem;
   }
 }
 
