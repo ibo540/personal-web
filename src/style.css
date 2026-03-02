@@ -884,6 +884,37 @@ footer {
     font-size: 1rem;
   }
 
+  /* Portrait: free up space so menu/theme/lang are always visible */
+  .navbar .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navbar .logo {
+    width: 0;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .navbar .nav-container {
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .navbar .menu-toggle,
+  .navbar .theme-toggle,
+  .navbar .lang-toggle {
+    flex-shrink: 0;
+  }
+
   .lang-toggle {
     min-width: 44px;
     min-height: 44px;
@@ -1024,6 +1055,58 @@ footer {
 
   footer p {
     font-size: 0.95rem;
+  }
+}
+
+/* ========== Portrait only: ensure header is always visible ========== */
+@media (max-width: 768px) and (orientation: portrait) {
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    z-index: 10000;
+  }
+
+  .navbar .container.nav-container {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .navbar .menu-toggle {
+    order: 1;
+    margin-right: 0.25rem;
+  }
+
+  .navbar .theme-toggle {
+    order: 2;
+    margin-right: 0.25rem;
+  }
+
+  .navbar .lang-toggle {
+    order: 3;
+  }
+
+  .navbar .logo {
+    order: 0;
+    width: 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Reserve space so hero content starts below the nav bar */
+  .hero {
+    padding-top: 56px;
+  }
+
+  .nav-links {
+    top: 56px;
   }
 }
 
