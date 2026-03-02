@@ -776,150 +776,185 @@ footer {
   animation-delay: 0.3s;
 }
 
-/* Responsive Nav */
+/* ========== MOBILE FIRST: Nav visible by default (phones) ========== */
 .menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-primary);
-  padding: 0.5rem;
+  display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
   border: none;
   background: transparent;
+  min-width: 48px;
+  min-height: 48px;
+  font-family: inherit;
+  font-weight: 600;
 }
 
-/* ========== Mobile & Phone (tablet and below) ========== */
-@media (max-width: 768px) {
-  /* Header bar must stand out from the starry background */
-  .navbar {
-    background: rgba(18, 18, 18, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 2px solid rgba(212, 175, 55, 0.5);
-    padding: 0.75rem 0;
-    padding-top: max(0.75rem, env(safe-area-inset-top));
-    min-height: 56px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-    z-index: 1000;
-  }
+.menu-toggle i {
+  font-size: 1.35rem;
+  color: #ffffff;
+}
 
-  .navbar .nav-container {
-    align-items: center;
-  }
+.menu-toggle-label {
+  color: #ffffff;
+}
 
+/* Mobile: nav links in overlay (hidden by default) */
+.nav-links {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #0a0a0a;
+  flex-direction: column;
+  padding: 2rem;
+  padding-top: max(1rem, env(safe-area-inset-top));
+  gap: 0.5rem;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  z-index: 999;
+  list-style: none;
+  margin: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.nav-links.active {
+  transform: translateY(0);
+}
+
+/* Mobile: solid header bar so it’s always visible */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 56px;
+  padding: 0.5rem 1rem;
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+  background: #0a0a0a;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbar .container.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  min-height: 48px;
+}
+
+.navbar .logo {
+  display: none;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.theme-toggle i {
+  color: #ffffff;
+}
+
+.nav-links .nav-link,
+.nav-links .btn {
+  display: block;
+  padding: 0.85rem 1rem;
+  min-height: 48px;
+  font-size: 1.05rem;
+  color: #e0e0e0;
+}
+
+body.light-theme .navbar {
+  background: #ffffff;
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .menu-toggle,
+body.light-theme .menu-toggle i,
+body.light-theme .menu-toggle-label,
+body.light-theme .theme-toggle,
+body.light-theme .theme-toggle i {
+  color: #111111;
+}
+
+body.light-theme .nav-links {
+  background: #ffffff;
+}
+
+/* Desktop: hide menu button and label, show full nav row */
+@media (min-width: 769px) {
   .menu-toggle,
-  .menu-toggle i,
-  .theme-toggle,
-  .theme-toggle i,
-  .lang-toggle {
-    color: var(--text-primary);
+  .menu-toggle-label {
+    display: none;
   }
 
-  .menu-toggle i {
-    font-size: 1.35rem;
+  .navbar {
+    padding: 1rem 0;
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    min-height: auto;
+    box-shadow: none;
   }
 
-  body.light-theme .navbar {
-    background: rgba(255, 255, 255, 0.98);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  .navbar .container.nav-container {
+    justify-content: space-between;
   }
 
-  body.light-theme .menu-toggle i,
-  body.light-theme .theme-toggle i {
-    color: #111;
-  }
-
-  body.light-theme .lang-toggle {
-    color: var(--accent-primary);
-    border-color: var(--accent-primary);
-  }
-
-  .nav-container {
-    flex-wrap: nowrap;
-  }
-
-  .menu-toggle {
-    display: flex;
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  .theme-toggle {
-    min-width: 44px;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  .navbar .logo {
+    display: block;
+    font-size: 1.5rem;
   }
 
   .nav-links {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    width: 100%;
-    background: #050505;
-    flex-direction: column;
-    padding: 2rem;
-    gap: 1rem;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
-    z-index: 999;
-  }
-
-  .nav-links.active {
-    transform: translateY(0);
-  }
-
-  body.light-theme .nav-links {
-    background: rgba(255, 255, 255, 0.98);
+    position: static;
+    transform: none;
+    flex-direction: row;
+    min-height: auto;
+    padding: 0;
+    background: transparent;
+    gap: 2rem;
   }
 
   .nav-links .nav-link,
   .nav-links .btn {
-    display: block;
-    padding: 0.75rem 1rem;
-    min-height: 44px;
-    font-size: 1rem;
-  }
-
-  /* Portrait: free up space so menu/theme/lang are always visible */
-  .navbar .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .navbar .logo {
-    width: 0;
-    min-width: 0;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-    flex-shrink: 0;
-  }
-
-  .navbar .nav-container {
-    justify-content: flex-end;
-    gap: 0.5rem;
-    flex-shrink: 0;
-    min-width: 0;
-  }
-
-  .navbar .menu-toggle,
-  .navbar .theme-toggle,
-  .navbar .lang-toggle {
-    flex-shrink: 0;
-  }
-
-  .lang-toggle {
-    min-width: 44px;
-    min-height: 44px;
-    padding: 0.5rem 0.75rem;
+    display: inline-block;
+    padding: inherit;
+    min-height: auto;
     font-size: 0.95rem;
+  }
+
+  body.light-theme .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* ========== Mobile & Phone (tablet and below) – extra tweaks ========== */
+@media (max-width: 768px) {
+  .nav-links {
+    top: 56px;
+    min-height: calc(100vh - 56px);
+    padding-top: 1rem;
   }
 
   .container {
@@ -939,6 +974,7 @@ footer {
   .hero {
     min-height: 100vh;
     padding: 2rem 0;
+    padding-top: 5rem; /* Clear fixed header on phone */
   }
 
   .hero h2 {

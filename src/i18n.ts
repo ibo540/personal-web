@@ -11,6 +11,7 @@ export const translations = {
       languages: 'Languages',
       contact: 'Contact',
       downloadCV: 'Download CV',
+      menu: 'Menu',
     },
     hero: {
       hello: "Hello, I'm",
@@ -105,6 +106,7 @@ export const translations = {
       languages: 'اللغات',
       contact: 'تواصل',
       downloadCV: 'تحميل السيرة',
+      menu: 'القائمة',
     },
     hero: {
       hello: 'مرحباً، أنا',
