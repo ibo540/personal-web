@@ -866,14 +866,19 @@ footer {
   left: 0;
   right: 0;
   width: 100%;
+  height: 56px;
   min-height: 56px;
-  padding: 0.5rem 1rem;
-  padding-top: max(0.5rem, env(safe-area-inset-top));
-  background: #0a0a0a;
-  border-bottom: 2px solid rgba(212, 175, 55, 0.6);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
-  z-index: 1000;
+  padding: 0;
+  padding-top: env(safe-area-inset-top, 0);
+  background: #0d0d0d;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.85);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
+  z-index: 99999;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: visible;
 }
 
 .navbar .container.nav-container {
@@ -883,12 +888,21 @@ footer {
   gap: 0.5rem;
   width: 100%;
   max-width: 100%;
-  padding: 0;
+  padding: 0.5rem 1rem;
   min-height: 48px;
+  flex-shrink: 0;
+  overflow: visible;
 }
 
 .navbar .logo {
   display: none;
+}
+
+.navbar .menu-toggle,
+.navbar .theme-toggle,
+.navbar .lang-toggle {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .theme-toggle {
@@ -934,10 +948,14 @@ body.light-theme .nav-links {
 
 /* Mobile: gold Menu button so it’s impossible to miss */
   .menu-toggle {
-    background: var(--accent-primary) !important;
+    background: #d4af37 !important;
+    background-color: #d4af37 !important;
     color: #000 !important;
+    border: 2px solid #b8960c !important;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+    min-width: 56px;
+    min-height: 48px;
   }
   .menu-toggle i,
   .menu-toggle-label {
@@ -946,7 +964,7 @@ body.light-theme .nav-links {
 
   .navbar {
     background: #0d0d0d !important;
-    border-bottom: 2px solid rgba(212, 175, 55, 0.7) !important;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.85) !important;
     z-index: 99999 !important;
   }
 
